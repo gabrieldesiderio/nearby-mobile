@@ -2,6 +2,7 @@ import { Image, Text, TouchableOpacity, TouchableOpacityProps, View } from "reac
 import { s } from "./styles";
 import { IconTicket } from "@tabler/icons-react-native";
 import { colors } from "@/styles/colors";
+import { router } from "expo-router";
 
 export type PlaceProps = {
   id: string
@@ -17,12 +18,12 @@ type Props = TouchableOpacityProps & {
 }
 
 export function Place({ data, ...rest }: Props) {
-  return <TouchableOpacity style={s.container} {...rest}>
+  return <TouchableOpacity onPress={() => router.navigate(`/market/${data.id}`)} style={s.container} {...rest}>
     <Image style={s.image} source={{ uri: data.cover }} />
 
     <View style={s.content}>
       <Text style={s.name}>{data.name}</Text>
-      <Text style={s.description}>{data.description}</Text>
+      <Text style={s.description} numberOfLines={2}>{data.description}</Text>
 
       <View style={s.footer}>
         <IconTicket size={16} color={colors.red.base} />
